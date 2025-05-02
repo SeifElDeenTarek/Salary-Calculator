@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/ivory">
+    android:background="@color/ivory"
+    android:layout_weight="3">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card1"
@@ -100,10 +101,35 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/allowancesLayout"
+                android:layout_below="@id/doublesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/allowances"
+                app:startIconDrawable="@drawable/allowance"
+                app:startIconMinSize="48dp"
+                app:startIconTint="#254391"
+                app:boxStrokeColor="@color/royal_blue"
+                app:hintTextColor="@color/royal_blue"
+                app:hintAnimationEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
+                    android:inputType="numberDecimal"
+                    android:id="@+id/allowances"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
     <Button
         style="@style/Widget.Material3.Button.ElevatedButton"
@@ -120,18 +146,19 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         style="?attr/materialCardViewElevatedStyle"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_margin="12dp"
         android:visibility="gone"
         >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="12dp">
@@ -143,20 +170,37 @@
                     android:layout_gravity="center"
                     android:textColor="@color/text_primary"
                     android:text="@string/salary"
+                    android:layout_centerHorizontal="true"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:id="@+id/salary_text"
 
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/final_salary"
+                    android:layout_below="@+id/salary_text"
                     android:layout_marginTop="8dp"
-                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"
                     android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:textColor="@color/text_primary"
                     />
 
-        </LinearLayout>
+            <Button
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:id="@+id/back"
+                android:layout_below="@id/final_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back"
+                android:backgroundTint="@color/royal_blue"
+                android:textColor="@color/ivory"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                />
+
+        </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

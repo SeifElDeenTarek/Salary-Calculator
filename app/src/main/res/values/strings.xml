@@ -7,4 +7,6 @@
     <string name="salary">Your Salary is:</string>
     <string name="calculate">Calculate</string>
     <string name="egp">" EGP"</string>
+    <string name="back">back</string>
+    <string name="allowances">Total allowances amount</string>
 </resources>
