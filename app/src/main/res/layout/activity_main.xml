@@ -3,49 +3,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/ivory"
-    android:layout_weight="3">
+    android:background="@drawable/gradient_background"
+    android:id="@+id/main">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:id="@+id/card1"
         android:layout_marginTop="8dp"
-        style="?attr/materialCardViewElevatedStyle"
-        app:cardBackgroundColor="@color/white"
         android:layout_margin="12dp"
+        android:background="@drawable/gradient_background"
         app:cardElevation="@dimen/cardview_default_elevation"
+        style="?attr/materialCardViewElevatedStyle"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:background="@drawable/gradient_background">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/monthlySalaryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/monthlySalaryLayout"
+                android:hint="@string/monthly_salary"
+                android:layout_marginBottom="8dp"
                 app:startIconDrawable="@drawable/money_24"
                 app:startIconMinSize="48dp"
                 app:startIconTint="@color/green"
                 app:boxStrokeColor="@color/royal_blue"
-                app:hintTextColor="@color/royal_blue"
-                android:hint="@string/monthly_salary"
-                app:errorEnabled="true"
-                android:layout_marginBottom="8dp">
+                android:textColorHint="@color/text_primary"
+                app:hintTextColor="@color/text_primary"
+                app:errorTextColor="@color/deep_red"
+                app:boxStrokeErrorColor="@color/deep_red"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
-                    android:id="@+id/monthlySalary"
                     android:inputType="numberDecimal"
+                    android:id="@+id/monthlySalary"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -60,9 +63,11 @@
                 app:startIconTint="@color/red"
                 app:hintAnimationEnabled="true"
                 app:boxStrokeColor="@color/royal_blue"
-                app:hintTextColor="@color/royal_blue"
+                android:textColorHint="@color/text_primary"
+                app:hintTextColor="@color/text_primary"
                 android:hint="@string/deduction"
-                app:helperTextTextColor="@color/red"
+                app:errorTextColor="@color/deep_red"
+                app:boxStrokeErrorColor="@color/deep_red"
                 app:errorEnabled="true"
                 android:layout_marginBottom="8dp">
 
@@ -84,11 +89,13 @@
                 android:hint="@string/doubles"
                 app:startIconDrawable="@drawable/doubles"
                 app:startIconMinSize="48dp"
-                app:startIconTint="#254391"
+                app:startIconTint="@color/deep_blue"
                 app:boxStrokeColor="@color/royal_blue"
-                app:hintTextColor="@color/royal_blue"
+                android:textColorHint="@color/text_primary"
+                app:hintTextColor="@color/text_primary"
                 app:hintAnimationEnabled="true"
-                app:helperTextTextColor="@color/red"
+                app:errorTextColor="@color/deep_red"
+                app:boxStrokeErrorColor="@color/deep_red"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -109,11 +116,13 @@
                 android:hint="@string/allowances"
                 app:startIconDrawable="@drawable/allowance"
                 app:startIconMinSize="48dp"
-                app:startIconTint="#254391"
+                app:startIconTint="@color/deep_blue"
                 app:boxStrokeColor="@color/royal_blue"
-                app:hintTextColor="@color/royal_blue"
+                android:textColorHint="@color/text_primary"
+                app:hintTextColor="@color/text_primary"
                 app:hintAnimationEnabled="true"
-                app:helperTextTextColor="@color/red"
+                app:errorTextColor="@color/deep_red"
+                app:boxStrokeErrorColor="@color/deep_red"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -126,7 +135,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -138,8 +146,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/calculate"
-        android:backgroundTint="@color/royal_blue"
-        android:textColor="@color/ivory"
+        android:backgroundTint="@color/pepper"
+        android:textColor="@color/text_primary"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         />
@@ -151,57 +159,64 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         style="?attr/materialCardViewElevatedStyle"
-        app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/cardview_default_elevation"
         android:layout_margin="12dp"
         android:visibility="gone"
         >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="12dp"
+            android:background="@drawable/gradient_background">
 
-                <!-- Title, secondary and supporting text -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="@color/text_primary"
                     android:text="@string/salary"
-                    android:layout_centerHorizontal="true"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textStyle="italic"
                     android:id="@+id/salary_text"
 
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/final_salary"
-                    android:layout_below="@+id/salary_text"
                     android:layout_marginTop="8dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
                     android:textAppearance="?attr/textAppearanceTitleLarge"
+                    android:textStyle="bold"
                     android:textColor="@color/text_primary"
                     />
 
-            <Button
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:id="@+id/back"
-                android:layout_below="@id/final_salary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/back"
-                android:backgroundTint="@color/royal_blue"
-                android:textColor="@color/ivory"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                />
+                <Button
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back"
+                    android:backgroundTint="@color/pepper"
+                    android:textColor="@color/text_primary"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:layout_below="@+id/calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="center"
+        android:src="@drawable/spiral"/>
 
 </RelativeLayout>
