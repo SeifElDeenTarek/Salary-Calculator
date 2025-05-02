@@ -1,14 +1,19 @@
 package com.example.salarycalculator;
 
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.LinearInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,18 +24,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
-    Button calculate, back;
-    MaterialCardView salCard, quesCard;
-    TextInputEditText monthSal, deduction, doubles, allowances;
-    TextInputLayout monthSalLayout, deductionLayout, doublesLayout, allowancesLayout;
-    TextView sal;
     float deductionAmount = 0.0F;
     float doublesAmount = 0.0F;
     float allowancesAmount = 0.0F;
+
+    boolean started = false;
+    boolean rotating = false;
+
+    ObjectAnimator rotation;
+    float currentRotation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +49,35 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        salCard = findViewById(R.id.card);
-        quesCard = findViewById(R.id.card1);
-        monthSal = findViewById(R.id.monthlySalary);
-        deduction = findViewById(R.id.deduction);
-        doubles = findViewById(R.id.doubles);
-        allowances = findViewById(R.id.allowances);
-        sal = findViewById(R.id.final_salary);
-        monthSalLayout = findViewById(R.id.monthlySalaryLayout);
-        deductionLayout = findViewById(R.id.deductionLayout);
-        doublesLayout = findViewById(R.id.doublesLayout);
-        allowancesLayout = findViewById(R.id.allowancesLayout);
-        calculate = findViewById(R.id.calculate);
-        back = findViewById(R.id.back);
+        MaterialCardView salCard = findViewById(R.id.card);
+        MaterialCardView quesCard = findViewById(R.id.card1);
+        TextInputEditText monthSal = findViewById(R.id.monthlySalary);
+        TextInputEditText deduction = findViewById(R.id.deduction);
+        TextInputEditText doubles = findViewById(R.id.doubles);
+        TextInputEditText allowances = findViewById(R.id.allowances);
+        TextView sal = findViewById(R.id.final_salary);
+        TextInputLayout monthSalLayout = findViewById(R.id.monthlySalaryLayout);
+        TextInputLayout deductionLayout = findViewById(R.id.deductionLayout);
+        TextInputLayout doublesLayout = findViewById(R.id.doublesLayout);
+        Button calculate = findViewById(R.id.calculate);
+        Button back = findViewById(R.id.back);
+        ImageView image = findViewById(R.id.image);
+
+        // Image animation
+        rotation = ObjectAnimator.ofFloat(image, "rotation", 0f, 360f);
+        rotation.setDuration(7777);
+        rotation.setRepeatCount(ObjectAnimator.INFINITE);
+        rotation.setInterpolator(new LinearInterpolator());
+        rotation.start();
+
+        image.setOnClickListener(view -> {
+            if(!rotating){
+                    rotation.pause();
+                }else {
+                    rotation.resume();
+                }
+            rotating = !rotating;
+        });
 
         calculate.setOnClickListener(view -> {
             String salStr = Objects.requireNonNull(monthSal.getText()).toString().trim();
@@ -96,10 +118,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Deactivate the Questions Card
-                quesCard.setEnabled(false);
-                quesCard.setAlpha(.3F);
-
                 // Allowances input validation
                 if(!allStr.isEmpty()){
                     allowancesAmount = Float.parseFloat(allStr);
@@ -110,6 +128,22 @@ public class MainActivity extends AppCompatActivity {
 
                 // Calculate the final salary
                 float finalSalary = (salary - deductionAmount) + (doublesAmount + allowancesAmount);
+
+                //lose focus
+                monthSal.clearFocus();
+                deduction.clearFocus();
+                doubles.clearFocus();
+                allowances.clearFocus();
+
+                // Hide Keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                View rootView = findViewById(android.R.id.content);
+                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
+
+                // Deactivate the Questions Card and the Image
+                quesCard.setEnabled(false);
+                quesCard.setAlpha(.3F);
+                image.setAlpha(.3F);
 
                 // Display the final salary
                 DecimalFormat df = new DecimalFormat("###,###.##");
@@ -129,9 +163,10 @@ public class MainActivity extends AppCompatActivity {
             // hide the salary card
             salCard.setVisibility(MaterialCardView.GONE);
 
-            // Reactivate the questions card
+            // Reactivate the questions card and Image
             quesCard.setEnabled(true);
             quesCard.setAlpha(1F);
+            image.setAlpha(1F);
 
             // Resets the errors
             monthSalLayout.setError(null);
@@ -145,5 +180,20 @@ public class MainActivity extends AppCompatActivity {
             allowances.setText(null);
         });
     }
-
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (view instanceof TextInputEditText) {
+                Rect outRect = new Rect();
+                view.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
+                    view.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 }

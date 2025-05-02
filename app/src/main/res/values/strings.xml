@@ -9,4 +9,6 @@
     <string name="egp">" EGP"</string>
     <string name="back">back</string>
     <string name="allowances">Total allowances amount</string>
+    <string name="application_logo">Application logo</string>
+    <string name="spiral">spiral</string>
 </resources>
