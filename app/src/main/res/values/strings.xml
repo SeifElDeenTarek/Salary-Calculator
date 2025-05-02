@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Salary Calculator</string>
+    <string name="monthly_salary">Monthly Salary</string>
+    <string name="helper_text_numbers">numbers only.</string>
+    <string name="deduction">How many days have been deducted ?</string>
+    <string name="doubles">How many double pay days ?</string>
+    <string name="salary">Your Salary is:</string>
+    <string name="calculate">Calculate</string>
 </resources>
