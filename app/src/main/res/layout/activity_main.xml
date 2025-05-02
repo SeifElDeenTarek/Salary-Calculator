@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:padding="12dp"
     android:background="@color/ivory">
 
     <com.google.android.material.card.MaterialCardView
@@ -17,8 +16,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         style="?attr/materialCardViewElevatedStyle"
-        app:cardBackgroundColor="@color/ivory"
-
+        app:cardBackgroundColor="@color/white"
+        android:layout_margin="12dp"
         app:cardElevation="@dimen/cardview_default_elevation"
         >
 
@@ -28,7 +27,7 @@
             android:padding="8dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/monthlySalary"
+                android:id="@+id/monthlySalaryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/money_24"
@@ -37,20 +36,22 @@
                 app:boxStrokeColor="@color/royal_blue"
                 app:hintTextColor="@color/royal_blue"
                 android:hint="@string/monthly_salary"
-                app:helperTextEnabled="false"
+                app:errorEnabled="true"
                 android:layout_marginBottom="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
+                    android:id="@+id/monthlySalary"
+                    android:inputType="numberDecimal"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/deduction"
-                android:layout_below="@id/monthlySalary"
+                android:id="@+id/deductionLayout"
+                android:layout_below="@id/monthlySalaryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/deduction"
@@ -61,20 +62,22 @@
                 app:hintTextColor="@color/royal_blue"
                 android:hint="@string/deduction"
                 app:helperTextTextColor="@color/red"
-                app:helperTextEnabled="false"
+                app:errorEnabled="true"
                 android:layout_marginBottom="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
+                    android:inputType="numberDecimal"
+                    android:id="@+id/deduction"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/doubles"
-                android:layout_below="@id/deduction"
+                android:id="@+id/doublesLayout"
+                android:layout_below="@id/deductionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/doubles"
@@ -85,12 +88,14 @@
                 app:hintTextColor="@color/royal_blue"
                 app:hintAnimationEnabled="true"
                 app:helperTextTextColor="@color/red"
-                app:helperTextEnabled="false">
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
+                    android:inputType="numberDecimal"
+                    android:id="@+id/doubles"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -120,7 +125,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         style="?attr/materialCardViewElevatedStyle"
-        app:cardBackgroundColor="@color/ivory"
+        app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/cardview_default_elevation"
         android:visibility="gone"
         >
@@ -144,6 +149,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/final_salary"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center"
                     android:textAppearance="?attr/textAppearanceTitleLarge"

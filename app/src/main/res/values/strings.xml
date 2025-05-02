@@ -6,4 +6,5 @@
     <string name="doubles">How many double pay days ?</string>
     <string name="salary">Your Salary is:</string>
     <string name="calculate">Calculate</string>
+    <string name="egp">" EGP"</string>
 </resources>
