@@ -7,12 +7,12 @@
     <color name="default_color">#5A5660</color>
     <color name="deep_grey">#85D1DB</color>
     ////////////////////////////////////////////
-    <color name="royal_blue">#3A5BA0</color>
+    <color name="royal_blue">#333333</color>
     <color name="ivory">#FAF9F6</color>
     <color name="grey">#B3EBF2</color>
     <color name="text_primary">#333333</color>
     <color name="card_bg">#FFFFFF</color>
     <color name="deep_blue">#254391</color>
-    <color name="pepper">#C9FDF2</color>
+    <color name="pepper">#333333</color>
     <color name="deep_red">#FF1744</color>
 </resources>

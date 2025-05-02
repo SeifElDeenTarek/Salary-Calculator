@@ -24,20 +24,14 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
-import java.time.Duration;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     float deductionAmount = 0.0F;
     float doublesAmount = 0.0F;
     float allowancesAmount = 0.0F;
-
-    boolean started = false;
     boolean rotating = false;
-
     ObjectAnimator rotation;
-    float currentRotation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Image animation
         rotation = ObjectAnimator.ofFloat(image, "rotation", 0f, 360f);
-        rotation.setDuration(7777);
+        rotation.setDuration(5555);
         rotation.setRepeatCount(ObjectAnimator.INFINITE);
         rotation.setInterpolator(new LinearInterpolator());
         rotation.start();
