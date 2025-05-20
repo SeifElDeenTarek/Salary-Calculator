@@ -136,13 +136,24 @@ public class MainActivity extends AppCompatActivity {
 
                 // Deactivate the Questions Card and the Image
                 quesCard.setEnabled(false);
-                quesCard.setAlpha(.3F);
+                quesCard.setAlpha(.1F);
                 image.setAlpha(.3F);
 
                 // Display the final salary
                 DecimalFormat df = new DecimalFormat("###,###.##");
                 String salString = df.format(finalSalary) + " EGP";
                 sal.setText(salString);
+
+                // Resets the errors
+                monthSalLayout.setError(null);
+                deductionLayout.setError(null);
+                doublesLayout.setError(null);
+
+                // Clear the text fields
+                monthSal.setText(null);
+                deduction.setText(null);
+                doubles.setText(null);
+                allowances.setText(null);
 
                 // Show the salary card
                 salCard.setVisibility(MaterialCardView.VISIBLE);
@@ -161,19 +172,9 @@ public class MainActivity extends AppCompatActivity {
             quesCard.setEnabled(true);
             quesCard.setAlpha(1F);
             image.setAlpha(1F);
-
-            // Resets the errors
-            monthSalLayout.setError(null);
-            deductionLayout.setError(null);
-            doublesLayout.setError(null);
-
-            // Clear the text fields
-            monthSal.setText(null);
-            deduction.setText(null);
-            doubles.setText(null);
-            allowances.setText(null);
         });
     }
+    // Function to lose the keyboard after focused is lost from the TextFields
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
